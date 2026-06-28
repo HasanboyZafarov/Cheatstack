@@ -1,77 +1,130 @@
-# React + TypeScript + Vite
+# Cheatstack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A use-case-first developer documentation platform. Find the answer to "how do I do X" in under 10 seconds — real code, clear explanations, no filler.
 
-Currently, two official plugins are available:
+Covers React hooks, TypeScript patterns, and the most-used frontend packages (Zustand, TanStack Query, React Hook Form, Zod, MSW, React Router, and more).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Stack
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+**Frontend**
+- React 19 + TypeScript
+- Vite
+- Tailwind CSS v4
+- shadcn/ui
+- Zustand — UI state (search, auth session)
+- TanStack Query — server state
+- React Hook Form + Zod — admin forms
+- React Router v6
+- Fuse.js — client-side fuzzy search
+- MSW + Faker.js — mock API during development
+- Lucide React — icons
+- Shiki — syntax highlighting
 
-Note: This will impact Vite dev & build performances.
+**Backend** *(planned)*
+- Node.js + Express
+- Supabase (Postgres + Auth)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Getting Started
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+```bash
+# Install dependencies
+npm install
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+# Start dev server (opens at http://localhost:3000)
+npm run dev
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+# Type check + build
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Project Structure
 
 ```
+src/
+├── components/
+│   ├── ui/          # shadcn base components
+│   ├── docs/        # DocCard, CodeBlock, CategoryFilter
+│   ├── search/      # SearchBar, SearchResults
+│   └── admin/       # AdminForms, EntryEditor
+├── pages/
+│   ├── docs/        # /docs, /docs/:category, /docs/:category/:slug
+│   ├── error/       # 404, error boundaries
+│   └── register/    # Admin auth
+├── store/
+│   ├── searchStore.ts
+│   └── authStore.ts
+├── lib/
+│   ├── api/         # All API calls (never fetch directly in components)
+│   ├── utils/       # Shared utilities
+│   └── validators/  # Zod schemas
+├── hooks/           # Custom hooks
+├── mocks/           # MSW handlers + Faker fixtures
+├── types/           # Shared TypeScript interfaces
+└── i18n/            # EN strings (UZ + RU planned)
+```
+
+---
+
+## Routes
+
+| Path | Description |
+|---|---|
+| `/` | Homepage — search, featured topics |
+| `/docs` | All entries, filterable |
+| `/docs/:category` | Category landing page |
+| `/docs/:category/:slug` | Single doc entry |
+| `/search` | Search results |
+| `/admin` | Dashboard (protected) |
+| `/admin/entries` | Manage entries |
+| `/admin/entries/new` | Create entry |
+| `/admin/entries/:id/edit` | Edit entry |
+| `/admin/categories` | Manage categories |
+| `/login` | Admin login |
+
+---
+
+## Doc Entry Format
+
+Every entry follows this structure — no exceptions:
+
+```
+Title       "How to store an array in localStorage"
+Category    localStorage
+Type        Concept | Package
+Difficulty  Beginner | Intermediate | Advanced
+Tags        [localStorage, serialization, JSON]
+
+Problem     What the developer is stuck on
+Solution    The approach in plain English
+Code        Tested, runnable TypeScript
+Why         What's happening under the hood
+Watch out   Specific pitfalls, not vague warnings
+Related     Links to related entries
+```
+
+---
+
+## Content Rules
+
+- Every title starts with "How to..." or is a clear question
+- Code examples are tested — no guessing
+- 5–10 high-quality entries per category beats 50 mediocre ones
+- No filler — every sentence earns its place
+- All UI strings go through `i18n/` from day one
+
+---
+
+## User Roles
+
+| Role | Access |
+|---|---|
+| Guest | Browse, search, copy — no account needed |
+| Admin | Create, edit, delete entries and categories |
+
+All content is public. Login is only for content management.
