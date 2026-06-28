@@ -1,0 +1,56 @@
+export const en = {
+  nav: {
+    search: 'Search',
+    allDocs: 'All docs',
+    concepts: 'Concepts',
+    packages: 'Packages',
+  },
+  search: {
+    placeholder: 'Search docs… (⌘K)',
+    empty: 'No results for',
+    hint: 'Press Enter to select, Esc to close',
+    shortcut: '⌘K',
+  },
+  home: {
+    headline: 'The answer is here.',
+    sub: 'Use-case first docs for React, TypeScript, and the packages you actually use.',
+    cta: 'Browse all docs',
+    featured: 'Popular topics',
+    recent: 'Recently added',
+  },
+  docs: {
+    allEntries: 'All entries',
+    filterBy: 'Filter',
+    sortBy: 'Sort',
+    noResults: 'No entries match your filters.',
+    clearFilters: 'Clear filters',
+    entries: 'entries',
+    difficulty: {
+      all: 'All levels',
+      beginner: 'Beginner',
+      intermediate: 'Intermediate',
+      advanced: 'Advanced',
+    },
+    type: {
+      all: 'All',
+      concept: 'Concept',
+      package: 'Package',
+    },
+  },
+  entry: {
+    problem: 'Problem',
+    solution: 'Solution',
+    code: 'Code',
+    why: 'Why this works',
+    watchOut: 'Watch out for',
+    related: 'Related entries',
+    copy: 'Copy',
+    copied: 'Copied!',
+    views: 'views',
+  },
+  errors: {
+    notFound: 'Page not found.',
+    notFoundSub: 'The page you are looking for does not exist.',
+    goHome: 'Go home',
+  },
+}

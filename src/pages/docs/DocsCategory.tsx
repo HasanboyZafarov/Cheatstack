@@ -1,5 +1,88 @@
-const DocsCategory = () => {
-  return <div>DocsCategory</div>;
-};
+import { useParams, Link } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
+import { ArrowLeft } from 'lucide-react'
+import { DocCard } from '@/components/docs/DocCard'
+import { Skeleton } from '@/components/ui/skeleton'
+import { Badge } from '@/components/ui/badge'
+import { SEO } from '@/components/SEO'
+import type { Category, Entry } from '@/types'
 
-export default DocsCategory;
+interface CategoryWithEntries extends Category {
+  entries: Entry[]
+}
+
+async function fetchCategory(slug: string): Promise<CategoryWithEntries> {
+  const res = await fetch(`/api/categories/${slug}`)
+  if (!res.ok) throw new Error('Not found')
+  return res.json()
+}
+
+export default function DocsCategory() {
+  const { category } = useParams<{ category: string }>()
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['category', category],
+    queryFn: () => fetchCategory(category!),
+    enabled: !!category,
+  })
+
+  if (isError) {
+    return (
+      <div className="mx-auto max-w-3xl px-6 py-16 text-center">
+        <p className="text-muted-foreground">Category not found.</p>
+        <Link to="/docs" className="mt-2 inline-flex items-center gap-1 text-sm text-primary hover:underline">
+          <ArrowLeft className="h-3 w-3" /> Back to docs
+        </Link>
+      </div>
+    )
+  }
+
+  return (
+    <div className="mx-auto max-w-3xl px-6 py-8">
+      {data && (
+        <SEO
+          title={`${data.name} — How-to guides`}
+          description={`${data.entryCount} practical how-to guides for ${data.name}. ${data.description}`}
+          canonical={`/docs/${data.slug}`}
+          type="website"
+        />
+      )}
+      <Link
+        to="/docs"
+        className="mb-6 inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+      >
+        <ArrowLeft className="h-3 w-3" />
+        All docs
+      </Link>
+
+      {isLoading ? (
+        <div className="space-y-6">
+          <Skeleton className="h-10 w-1/2" />
+          <Skeleton className="h-4 w-2/3" />
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="h-28" />)}
+          </div>
+        </div>
+      ) : data && (
+        <>
+          <div className="mb-6">
+            <div className="flex items-center gap-3 mb-1">
+              <h1 className="text-2xl font-bold text-foreground">{data.name}</h1>
+              <Badge variant="outline" className="text-xs capitalize">{data.type}</Badge>
+            </div>
+            <p className="text-sm text-muted-foreground">{data.description}</p>
+            <p className="mt-1 text-xs text-muted-foreground/60">{data.entries.length} entries</p>
+          </div>
+
+          {data.entries.length === 0 ? (
+            <p className="py-12 text-center text-muted-foreground text-sm">No entries yet.</p>
+          ) : (
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {data.entries.map(e => <DocCard key={e.id} entry={e} />)}
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  )
+}
