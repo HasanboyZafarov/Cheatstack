@@ -12,6 +12,8 @@
     --font-heading: 'Roboto Slab Variable', serif;
     --font-sans: 'Instrument Sans Variable', sans-serif;
     --color-sidebar-ring: var(--sidebar-ring);
+    --color-green: var(--green);
+    --color-green-hover: var(--green-hover);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
     --color-sidebar-accent: var(--sidebar-accent);
@@ -76,7 +78,9 @@
     --chart-3: oklch(0.588 0.158 241.966);
     --chart-4: oklch(0.5 0.134 242.749);
     --chart-5: oklch(0.443 0.11 240.79);
-    --radius: 0.45rem;
+    --radius: 0.25rem;
+    --green: #448460;
+    --green-hover: #3a7050;
     --sidebar: oklch(0.987 0.002 197.1);
     --sidebar-foreground: oklch(0.148 0.004 228.8);
     --sidebar-primary: oklch(0.218 0.008 223.9);
@@ -141,4 +145,7 @@
     --sidebar-accent-foreground: oklch(0.92 0.005 258);
     --sidebar-border: oklch(0.255 0.008 264);
     --sidebar-ring: oklch(0.65 0.13 25);
+    --radius: 0.25rem;
+    --green: #448460;
+    --green-hover: #3a7050;
 }
