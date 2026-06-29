@@ -1,6 +1,7 @@
+import { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, Search } from 'lucide-react'
 import { DocCard } from '@/components/docs/DocCard'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Badge } from '@/components/ui/badge'
@@ -19,6 +20,7 @@ async function fetchCategory(slug: string): Promise<CategoryWithEntries> {
 
 export default function DocsCategory() {
   const { category } = useParams<{ category: string }>()
+  const [query, setQuery] = useState('')
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['category', category],
@@ -74,13 +76,38 @@ export default function DocsCategory() {
             <p className="mt-1 text-xs text-muted-foreground/60">{data.entries.length} entries</p>
           </div>
 
-          {data.entries.length === 0 ? (
-            <p className="py-12 text-center text-muted-foreground text-sm">No entries yet.</p>
-          ) : (
-            <div className="divide-y divide-border">
-              {data.entries.map(e => <DocCard key={e.id} entry={e} />)}
-            </div>
-          )}
+          <div className="relative mb-4">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground pointer-events-none" />
+            <input
+              type="text"
+              placeholder={`Search in ${data.name}…`}
+              value={query}
+              onChange={e => setQuery(e.target.value)}
+              className="w-full rounded border border-border bg-card pl-8 pr-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/40 transition-colors"
+            />
+          </div>
+
+          {(() => {
+            const q = query.trim().toLowerCase()
+            const filtered = q
+              ? data.entries.filter(e =>
+                  e.title.toLowerCase().includes(q) ||
+                  e.tags.some(t => t.toLowerCase().includes(q))
+                )
+              : data.entries
+
+            if (data.entries.length === 0)
+              return <p className="py-12 text-center text-muted-foreground text-sm">No entries yet.</p>
+
+            if (filtered.length === 0)
+              return <p className="py-12 text-center text-muted-foreground text-sm">No results for "{query}".</p>
+
+            return (
+              <div className="divide-y divide-border">
+                {filtered.map(e => <DocCard key={e.id} entry={e} />)}
+              </div>
+            )
+          })()}
         </>
       )}
     </div>
