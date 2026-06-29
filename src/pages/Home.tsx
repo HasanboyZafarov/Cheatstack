@@ -52,10 +52,10 @@ export default function Home() {
       {/* Hero */}
       <section className="flex flex-col items-center justify-center px-6 pt-12 pb-8 text-center">
         <h1 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl leading-tight">
-          React & TypeScript,<br className="hidden sm:block" /> when you need it.
+          The answer, when you need it.
         </h1>
         <p className="mt-3 max-w-md text-sm text-muted-foreground">
-          Real code for the packages you actually use.
+          Real code snippets for the tools and packages you actually use.
         </p>
 
         <button
