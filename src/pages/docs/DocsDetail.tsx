@@ -110,7 +110,7 @@ export default function DocsDetail() {
         />
       )}
       {/* Breadcrumb */}
-      <nav className="mb-6 flex items-center gap-1 text-xs text-muted-foreground">
+      <nav className="mb-6 flex items-center gap-1 text-[11px] font-mono text-muted-foreground">
         <Link to="/docs" className="hover:text-foreground transition-colors">
           Docs
         </Link>
@@ -129,7 +129,7 @@ export default function DocsDetail() {
         <LoadingSkeleton />
       ) : (
         entry && (
-          <article className="space-y-8">
+          <article className="space-y-10">
             {/* Header */}
             <header>
               <div className="flex flex-wrap items-center gap-2 mb-3">
@@ -150,8 +150,6 @@ export default function DocsDetail() {
                 {entry.title}
               </h1>
             </header>
-
-            <Separator />
 
             {/* Problem */}
             <Section label="Problem">
@@ -188,7 +186,7 @@ export default function DocsDetail() {
                       key={i}
                       className="flex gap-2 text-sm text-muted-foreground leading-relaxed"
                     >
-                      <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
+                      <span className="mt-0.5 shrink-0 text-primary/50 font-medium">—</span>
                       <span>
                         <InlineText text={p} />
                       </span>
@@ -236,7 +234,7 @@ function Section({
 }) {
   return (
     <section>
-      <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-primary">
+      <h2 className="mb-3 text-[11px] font-medium text-muted-foreground">
         {label}
       </h2>
       {children}
