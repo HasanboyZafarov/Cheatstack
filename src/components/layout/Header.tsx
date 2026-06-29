@@ -30,8 +30,8 @@ export function Header() {
         </SheetContent>
       </Sheet>
 
-      <NavLink to="/" className="flex items-center gap-2 font-bold text-foreground tracking-tight">
-        <span className="font-mono text-xs border px-1.5 py-0.5 rounded-sm" style={{ color: '#448460', borderColor: '#44846040' }}>CS</span>
+      <NavLink to="/" className="flex items-center gap-1.5 font-bold text-foreground tracking-tight">
+        <span className="text-[color:var(--color-green)]">·</span>
         <span>Cheatstack</span>
       </NavLink>
 
