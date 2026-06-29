@@ -244,12 +244,11 @@ function Section({
 
 function LoadingSkeleton() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       <div className="space-y-3">
         <Skeleton className="h-5 w-32" />
         <Skeleton className="h-8 w-3/4" />
       </div>
-      <Skeleton className="h-px w-full" />
       <div className="space-y-2">
         <Skeleton className="h-3 w-20" />
         <Skeleton className="h-4 w-full" />

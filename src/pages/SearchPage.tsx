@@ -47,7 +47,7 @@ export default function SearchPage() {
       ) : (
         <>
           <p className="mb-4 text-xs text-muted-foreground">{results.length} result{results.length !== 1 ? 's' : ''} for &ldquo;{q}&rdquo;</p>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div className="divide-y divide-border">
             {results.map(e => <DocCard key={e.id} entry={e} />)}
           </div>
         </>

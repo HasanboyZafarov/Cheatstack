@@ -31,7 +31,7 @@ export function Header() {
       </Sheet>
 
       <NavLink to="/" className="flex items-center gap-1.5 font-bold text-foreground tracking-tight">
-        <span className="text-[color:var(--color-green)]">·</span>
+        <span className="text-primary">·</span>
         <span>Cheatstack</span>
       </NavLink>
 

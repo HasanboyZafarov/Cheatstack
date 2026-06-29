@@ -100,7 +100,7 @@ export default function Home() {
         <section>
           <h2 className="text-[11px] font-medium text-muted-foreground mb-3">Recently added</h2>
           {isLoading ? (
-            <div className="space-y-px">
+            <div className="divide-y divide-border">
               {Array.from({ length: 6 }).map((_, i) => (
                 <Skeleton key={i} className="h-12 rounded" />
               ))}
@@ -116,7 +116,7 @@ export default function Home() {
 
         {/* Browse CTA */}
         <div className="flex justify-center">
-          <Button asChild size="lg" className="bg-[color:var(--color-green)] text-white hover:bg-[color:var(--color-green-hover)] border-0">
+          <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 border-0">
             <Link to="/docs">
               Browse all docs <ArrowRight className="ml-2 h-4 w-4" />
             </Link>

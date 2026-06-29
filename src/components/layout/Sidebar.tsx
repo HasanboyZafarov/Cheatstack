@@ -37,7 +37,7 @@ export function Sidebar({ onNavigate }: { onNavigate?: (to: string) => void }) {
       {/* Logo */}
       <div className="flex items-center gap-2 px-4 h-14 border-b border-sidebar-border shrink-0">
         <NavLink to="/" onClick={() => nav('/')} className="flex items-center gap-1.5 font-bold text-sidebar-foreground tracking-tight">
-          <span className="text-[color:var(--color-green)]">·</span>
+          <span className="text-sidebar-primary">·</span>
           <span>Cheatstack</span>
         </NavLink>
       </div>
@@ -89,8 +89,8 @@ export function Sidebar({ onNavigate }: { onNavigate?: (to: string) => void }) {
           Blog
         </NavLink>
 
-        <CollapsibleSection label="Concepts" categories={concepts} defaultOpen onNavigate={onNavigate} />
-        <CollapsibleSection label="Packages" categories={packages} defaultOpen onNavigate={onNavigate} />
+        <CollapsibleSection label="Concepts" categories={concepts} onNavigate={onNavigate} />
+        <CollapsibleSection label="Packages" categories={packages} onNavigate={onNavigate} />
       </ScrollArea>
 
       {/* User strip */}
@@ -144,7 +144,6 @@ export function Sidebar({ onNavigate }: { onNavigate?: (to: string) => void }) {
 function CollapsibleSection({ label, categories, onNavigate }: {
   label: string
   categories: Category[]
-  defaultOpen?: boolean
   onNavigate?: (to: string) => void
 }) {
   return (
