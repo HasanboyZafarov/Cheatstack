@@ -50,22 +50,20 @@ export default function Home() {
     <div className="flex flex-col">
       <SEO canonical="/" />
       {/* Hero */}
-      <section className="flex flex-col items-center justify-center px-6 pt-20 pb-14 text-center">
-        <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
-          The answer is here.
+      <section className="flex flex-col items-center justify-center px-6 pt-12 pb-8 text-center">
+        <h1 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl leading-tight">
+          React & TypeScript,<br className="hidden sm:block" /> when you need it.
         </h1>
-        <p className="mt-4 max-w-lg text-base text-muted-foreground sm:text-lg">
-          Real code for React, TypeScript, and the packages you actually use.
+        <p className="mt-3 max-w-md text-sm text-muted-foreground">
+          Real code for the packages you actually use.
         </p>
 
         <button
           onClick={() => setOpen(true)}
-          className="group mt-8 flex w-full max-w-sm items-center gap-3 rounded border border-border bg-card px-4 py-3 text-left shadow-sm transition-all hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="group mt-6 flex w-full max-w-sm items-center gap-3 rounded border border-border bg-card px-4 py-2.5 text-left transition-colors hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <Search className="h-4 w-4 shrink-0 text-muted-foreground group-hover:text-primary transition-colors" />
-          <span className="flex-1 text-sm text-muted-foreground">
-            Search docs…
-          </span>
+          <span className="flex-1 text-sm text-muted-foreground">Search docs…</span>
           <kbd className="hidden sm:flex items-center gap-0.5 rounded border border-border bg-muted px-1.5 py-0.5 text-[10px] font-mono text-muted-foreground">
             ⌘K
           </kbd>
@@ -75,28 +73,23 @@ export default function Home() {
       <div className="mx-auto w-full max-w-3xl px-6 pb-16 space-y-12">
         {/* Categories */}
         <section>
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xs font-semibold uppercase tracking-wider text-primary">Popular topics</h2>
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-[11px] font-medium text-muted-foreground">Popular topics</h2>
             <Link to="/docs" className="text-xs text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1">
               All docs <ArrowRight className="h-3 w-3" />
             </Link>
           </div>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+          <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-3">
             {categories.map(cat => {
               const Icon = ICON_MAP[cat.icon ?? 'FileText'] ?? FileText
               return (
                 <Link
                   key={cat.id}
                   to={`/docs/${cat.slug}`}
-                  className="group flex items-center gap-3 rounded border border-border bg-card p-4 transition-colors hover:bg-accent/40 hover:border-primary/30"
+                  className="group flex items-center gap-2.5 rounded border border-border bg-card p-3 transition-colors hover:border-primary/40"
                 >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded bg-muted transition-colors group-hover:bg-primary/10">
-                    <Icon className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
-                  </span>
-                  <div className="min-w-0">
-                    <p className="text-sm font-medium text-foreground truncate">{cat.name}</p>
-                    <p className="text-xs text-muted-foreground">{cat.entryCount} entries</p>
-                  </div>
+                  <Icon className="h-4 w-4 shrink-0 text-muted-foreground group-hover:text-primary transition-colors" />
+                  <span className="text-sm font-medium text-foreground truncate">{cat.name}</span>
                 </Link>
               )
             })}
@@ -105,15 +98,15 @@ export default function Home() {
 
         {/* Recent entries */}
         <section>
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-primary mb-4">Recently added</h2>
+          <h2 className="text-[11px] font-medium text-muted-foreground mb-3">Recently added</h2>
           {isLoading ? (
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+            <div className="space-y-px">
               {Array.from({ length: 6 }).map((_, i) => (
-                <Skeleton key={i} className="h-28 rounded" />
+                <Skeleton key={i} className="h-12 rounded" />
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+            <div className="divide-y divide-border">
               {recent.map(entry => (
                 <DocCard key={entry.id} entry={entry} />
               ))}
@@ -123,7 +116,7 @@ export default function Home() {
 
         {/* Browse CTA */}
         <div className="flex justify-center">
-          <Button asChild size="lg" className="bg-[#448460] text-white hover:bg-[#3a7050] border-0">
+          <Button asChild size="lg" className="bg-[color:var(--color-green)] text-white hover:bg-[color:var(--color-green-hover)] border-0">
             <Link to="/docs">
               Browse all docs <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
@@ -133,8 +126,8 @@ export default function Home() {
         {/* Blog teaser */}
         {posts.length > 0 && (
           <section>
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xs font-semibold uppercase tracking-wider text-primary">From the blog</h2>
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-[11px] font-medium text-muted-foreground">From the blog</h2>
               <Link to="/blog" className="text-xs text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1">
                 All posts <ArrowRight className="h-3 w-3" />
               </Link>
