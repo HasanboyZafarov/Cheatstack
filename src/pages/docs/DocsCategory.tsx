@@ -59,8 +59,8 @@ export default function DocsCategory() {
         <div className="space-y-6">
           <Skeleton className="h-10 w-1/2" />
           <Skeleton className="h-4 w-2/3" />
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="h-28" />)}
+          <div className="divide-y divide-border">
+            {Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="h-12 py-3" />)}
           </div>
         </div>
       ) : data && (
@@ -77,7 +77,7 @@ export default function DocsCategory() {
           {data.entries.length === 0 ? (
             <p className="py-12 text-center text-muted-foreground text-sm">No entries yet.</p>
           ) : (
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="divide-y divide-border">
               {data.entries.map(e => <DocCard key={e.id} entry={e} />)}
             </div>
           )}

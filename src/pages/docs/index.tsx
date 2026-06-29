@@ -85,8 +85,8 @@ export default function DocsIndex() {
       </div>
 
       {isLoading ? (
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-          {Array.from({ length: 8 }).map((_, i) => <Skeleton key={i} className="h-28" />)}
+        <div className="divide-y divide-border">
+          {Array.from({ length: 8 }).map((_, i) => <Skeleton key={i} className="h-12 py-3" />)}
         </div>
       ) : entries.length === 0 ? (
         <div className="py-16 text-center">
@@ -96,7 +96,7 @@ export default function DocsIndex() {
           </Button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div className="divide-y divide-border">
           {entries.map(e => <DocCard key={e.id} entry={e} />)}
         </div>
       )}
